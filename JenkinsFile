@@ -10,15 +10,17 @@ pipeline {
         stage('Build') {
        
             steps {
-                sh '''
-                ls -al
-                node --version
-                npm --version
-                npm config set cache .npm-cache
-                npm ci 
-                npm run build
-                ls -al
-                '''
+                withEnv(['NPM_CONFIG_CACHE=.npm-cache']){
+                    sh '''
+                    ls -al
+                    node --version
+                    npm --version
+                    npm ci 
+                    npm run build
+                    ls -al
+                    '''
+                }
+                
             }
         }
         stage('test') {
