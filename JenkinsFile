@@ -33,4 +33,10 @@ pipeline {
             }
         }
     }
+    post{
+        always{
+            junit '**/test-results/*.xml'
+            sh 'npm cache clean --force'
+        }
+    }
 }
